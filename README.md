@@ -3,12 +3,28 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
 ![SQLite](https://img.shields.io/badge/SQLite-Database-blue)
 ![Status](https://img.shields.io/badge/Status-Active-success)
+![Platform](https://img.shields.io/badge/Platform-Linux-orange)
 
 ThreatHawk is a lightweight SIEM-inspired security monitoring platform built with Python, FastAPI, SQLite, and Linux system logs.
 
 It collects SSH authentication events from Linux journals, stores them in a database, detects brute-force login activity, generates security alerts, and exposes data through REST APIs.
 
 ---
+
+## How It Works
+
+1. SSH authentication logs are collected from Linux system journals using `journalctl`.
+2. Logs are parsed and normalized into structured events.
+3. Events are stored in a SQLite database.
+4. The detection engine analyzes events for suspicious patterns.
+5. Alerts are generated and stored.
+6. FastAPI exposes events, statistics, and alerts through REST APIs.
+
+## Overview
+
+Traditional SIEM platforms can be complex and resource-intensive.
+
+ThreatHawk was built as a lightweight security monitoring platform to demonstrate core SOC and SIEM concepts such as log collection, event normalization, attack detection, alert generation, and API-driven monitoring.
 
 ## Features
 
@@ -45,6 +61,8 @@ FastAPI API
 
 ## Screenshots
 
+The following screenshots demonstrate ThreatHawk's API endpoints and security monitoring capabilities.
+
 ### API Documentation
 
 ![Swagger Dashboard](screenshots/swagger-dashboard.png)
@@ -60,10 +78,6 @@ FastAPI API
 ### Ingestion Results
 
 ![Ingestion Results](screenshots/ingest-api.png)
-
-### Database Events
-
-![Database Events](screenshots/database-events.png)
 
 ---
 
@@ -133,7 +147,7 @@ within 5 minutes
 ### Clone Repository
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/Riisshi/ThreatHawk
 
 cd ThreatHawk
 ```
@@ -159,7 +173,7 @@ pip install -r requirements.txt
 ### Create Database
 
 ```bash
-python create_db.py
+python -m scripts.create_db
 ```
 
 ### Start API Server
@@ -222,6 +236,7 @@ http://127.0.0.1:8000/docs
 ThreatHawk/
 │
 ├── backend/
+│   ├── __init__.py
 │   ├── alert_engine.py
 │   ├── collector.py
 │   ├── database.py
@@ -231,15 +246,28 @@ ThreatHawk/
 │   ├── models.py
 │   └── parser.py
 │
-├── logs/
+├── screenshots/
+│   ├── alerts-api.png
+│   ├── events-api.png
+│   ├── ingest-api.png
+│   └── swagger-dashboard.png
+│
+├── scripts/
+│   ├── create_db.py
+│   ├── generate_alerts.py
+│   ├── ingest_ssh.py
+│   ├── load_logs.py
+│   ├── view_alerts.py
+│   └── view_events.py
 │
 ├── tests/
+│   ├── test_collector.py
+│   ├── test_detector.py
+│   └── test_parser.py
 │
-├── create_db.py
-├── generate_alerts.py
-├── ingest_ssh.py
-├── requirements.txt
-└── README.md
+├── .gitignore
+├── README.md
+└── requirements.txt
 ```
 
 ---
@@ -263,7 +291,7 @@ ThreatHawk/
 
 **RishiKhanth**
 
-B.Tech Computer Science & Systems Engineering  
+B.Tech CSE Cyber Security  
 Christ (Deemed to be University)
 
 ---
